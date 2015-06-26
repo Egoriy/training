@@ -1,0 +1,96 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	
+				<div class="tabbable tabs-left">
+					
+					{% set i = 1 %}
+						{%for day in days %}					
+							<div class="accordion" id="accordion2">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle btn btn-large btn-block btn-default " data-toggle="collapse" data-parent="#accordion2" href="#collapse{{i}}">
+										День №{{i}}:{{day.CurrentDayName}}
+										</a>
+									</div>
+									<div id="collapse{{i}}" class="accordion-body collapse">
+										<div class="accordion-inner">
+											<div class="tab-content">
+												<div class="tab-pane fade in active" >
+													<table class="table">
+														<caption>Упражнения выбранного дня</caption>
+														<thead>
+														<tr>
+															<th>№</th>
+															<th>Упражнение</th>
+															<th>Подходы</th>
+															<th>Повторения</th>
+															
+															<th></th>
+														</tr>
+														</thead>
+														<tbody id="content">
+														
+															{% set j = 1 %}
+															{% for exercise in exercises %}
+															{% if exercise.id_cuurentDK==day.id_cuurentDK %}
+																<tr>
+																	<td>{{ j }}</td>
+																	<td>{{ exercise.NameExercise }}</td>
+																	<td>{{ exercise.CountApproaches }}</td>
+																	<td>{{ exercise.CountRepeat }}</td>
+																	
+																	{% set j = j + 1 %}
+																	<td>
+																		<form method="POST" action="/index.php/exercises/{{ exercise.id_exerciseCatalog }}/{{id_prog}}">
+																			<input type="hidden" name="_method" value="DELETE">
+																			<button type="submit" class="btn btn-danger">Удалить</button>
+																		</form>
+																	</td>
+																</tr>
+																{% endif %}
+															{% endfor %}
+								
+														</tbody>
+													</table>
+								
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{%set i = i +1%}
+						{% endfor %}
+						<form method="POST" action="/index.php/add_common_exercise/{{id_prog}}" class="form-inline">
+							<fieldset>
+								<legend>Новое упражнение</legend>
+								<div class="form-group">
+									<tr>
+										<td><select name="selectedExercise" class="form-control"}}>
+										{% for exercise in allExercise %}
+											<option name="nameOfExercise{{i}}" value = {{exercise.id_notestExercise}}>{{exercise.NameOfExercise}}</option>
+										{% endfor %}
+															
+										</select></td>
+										<td><select name="selectedDay" class="form-control">
+										{%set i = i%}
+										{% for day in days %}
+											<option name="day{{i}}" value={{day.id_cuurentDK}}>{{day.CurrentDayName}}</option>
+											{%set i = i +1%}
+										{% endfor %}
+															
+										</select></td>
+										<td><input name="comment_exercise" placeholder="Комментарий" class="form-control"></a></td>
+										</tr><tr> </br>
+										<td><input name="CountApproach" type="number" min="1" max ="10" required placeholder="Подходы" class="form-control"></a></td>
+										<td><input name="CountRepeat" type="number" required min="1" max="25" placeholder="Повторения" class="form-control"></a></td>
+									</tr>
+								</div>
+								<tr><td><button type="submit" class="btn btn-primary">Добавить упражнение</button></td></tr>
+							</fieldset>
+						</form>
+					
+						</div>
+
+{% endblock %}

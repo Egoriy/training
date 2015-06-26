@@ -1,0 +1,47 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+<div class="tabbable tabs-left">
+					
+					 
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<caption>Добавление питания клиенту {{client}}</caption>
+								
+								<thead>
+								<tr>
+									<th>Приемов пищи</th>
+									<th>Каллорий</th>
+									<th>Белка</th>
+									<th>Углеводов</th>
+									<th>Жира</th>
+									<th>Дата</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+										
+										<form method="POST" action="/index.php/nutritiones/{{id_client}}" class="form-inline">
+											<fieldset>
+												<legend>Добавление питания</legend>
+												<div class="form-group">
+													<tr>
+														<td><input type="number" required min="3" max="8" name="NumberOfMeals" placeholder="" class="form-control"></td>
+														<td><input type="number" required min="500" max="7000" name="Calorie" placeholder="" class="form-control"></td>
+														<td><input type="number" required min="50" max="400" name="Protein" placeholder="" class="form-control"></td>
+														<td><input type="number" required min="10" max="300" name="Carbogidrates" placeholder="" class="form-control"></td>
+														<td><input type="number" required min="5" max="300" name="fat" placeholder="" class="form-control"></td>														
+														<td><input type="date" required name="date" placeholder="" class="form-control"></td>														
+													</tr>
+												</div>
+												<tr><td><button type="submit" class="btn btn-primary">Добавить</button></td></tr>
+											</fieldset>
+										</form>
+								</tbody>
+							</table>
+							
+							</div>
+							</div>
+							</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	
+				<div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<tbody id="content">
+								<form method="POST" action="/index.php/add_common_day/{{id_prog}}" class="form-inline">
+											<fieldset>
+												<legend>Добавить дни тренировок</legend>
+												<div class="form-group">
+												
+													{%for i in 1..days %}
+													<tr>
+														<td><input required minlength="3" name="{{i}}" placeholder="Наменование дня " class="form-control"></td>
+														<td><input name="{{i}}{{i}}" minlength="3" placeholder="Комментарий" class="form-control"></a></td>
+														
+													</tr>
+													{% endfor %}
+												</div>
+												<tr><td><button type="submit" class="btn btn-primary">Добавить дни</button></td></tr>
+											</fieldset>
+										</form>
+								
+								</tbody>
+							</table>
+							
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

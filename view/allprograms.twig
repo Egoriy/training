@@ -1,0 +1,61 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	<script type="application/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script type="application/javascript" src="/assets/js/myscripts.js"></script>
+	
+				<div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="content">
+							<table class="table">
+								<caption>Программы</caption>
+								<thead>
+								<tr>
+									<th>Наименование программы</th>
+									<th>Дней цикла</th>
+									<th>Комментарий</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								{% set i = 1 %}
+									{% for program in programs %}
+										<tr >
+											
+											{% set i = i + 1 %}
+											<td><a href="/index.php/program_common/{{ program.id_program_catalog}}">{{ program.NameProgram }}</a></td>
+											<td>{{ program.DayOfTheOneCycle }}</td>
+											<td>{{ program.Comment }}</td>
+											
+											<td>
+												<form method="POST" action="/index.php/programs_common/{{ program.id_program_catalog}}">
+													<input type="hidden" name="_method" value="DELETE">
+													<button type="submitmy" class="btn btn-danger">Удалить</button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+								
+								
+								</tbody>
+							</table>
+							<form method="get" action="/index.php/add_common_programm" class="form-inline">
+								<fieldset>
+								<table>
+								<tbody>
+								<thead>
+									<tr><td><legend>Добавить общую программу</legend></td></tr>
+									
+									<th>
+									<button type="submit" class="btn btn-primary">Добавить программу</button>
+									</th></tr>
+								</thead>
+								</tbody>
+								</table>
+								</fieldset>
+							</form>
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

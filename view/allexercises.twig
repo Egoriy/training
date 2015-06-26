@@ -1,0 +1,57 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	<script type="application/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script type="application/javascript" src="/assets/js/myscripts.js"></script>
+	
+				<div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" id="content">
+							<table class="table">
+								<caption>Упражнения выбранного дня</caption>
+								<thead>
+								<tr>
+									<th>№</th>
+									<th>Упражнение</th>
+									<th>Описание</th>
+									
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								
+								{% set i = 1 %}
+								{% for exercise in exercises %}
+									<tr>
+										<td>{{ i }}</td>
+										<td>{{ exercise.NameOfExercise }}</td>
+										<td>{{ exercise.BriefDescription }}</td>
+										{% set i = i + 1 %}
+										<td>
+											<form method="POST" action="/index.php/allexercise/{{ exercise.id_notestExercise }}">
+												<input type="hidden" name="_method" value="DELETE">
+												<button type="submit" class="btn btn-danger">Удалить</button>
+											</form>
+										</td>
+									</tr>
+								{% endfor %}
+								
+								</tbody>
+							</table>
+							<form method="POST" action="/index.php/addAllExercises" class="form-inline">
+								<fieldset>
+									<legend>Дабовать упражнение в справочник</legend>
+										<div class="form-group">
+											<tr>
+												<td><input name="exrcise_cat" required minlength="3" maxlenght="50" placeholder="Наменование упражнения" class="form-control"></td>
+												<td><input name="comment_exercise_cat" placeholder="Комментарий" maxlenght="50" class="form-control"></td>
+											</tr>
+										</div>
+									<tr><td><button type="submit" class="btn btn-primary">Добавить</button></td></tr>
+								</fieldset>
+							</form>
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

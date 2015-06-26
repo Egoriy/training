@@ -1,0 +1,49 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+<div class="tabbable tabs-left">
+					
+					 
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<caption>Добавление замеров клиенту {{client}}</caption>
+								
+								<thead>
+								<tr>
+									<th>Рост</th>
+									<th>Вес</th>
+									<th>Бицепс</th>
+									<th>Талия</th>
+									<th>Бедро</th>
+									<th>Объем груди</th>
+									<th>Дата</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+										
+										<form method="POST" action="/index.php/anthropometrics/{{id_client}}" class="form-inline">
+											<fieldset>
+												<legend>Новые замеры</legend>
+												<div class="form-group">
+													<tr>
+														<td><input type="number" required min="50" max="250" name="height" placeholder="рост" class="form-control"></td>
+														<td><input type="number" required min="25" max="200" name="weight" placeholder="вес" class="form-control"></a></td>
+														<td><input type="number" required min="10" max="100" name="BicepsVol" placeholder="бицепс" class="form-control"></a></td>
+														<td><input type="number" required min="35" max="200" name="WaistVol" placeholder="талия" class="form-control"></a></td>
+														<td><input type="number" required min="15" max="150" name="hipsVol" placeholder="бедро" class="form-control"></a></td>
+														<td><input type="number" required min="35" max="200" name="BustVol" placeholder="грудь" class="form-control"></a></td>
+														<td><input type="date" required name="Date" placeholder="дата" class="form-control"></a></td>	
+													</tr>
+												</div>
+												<tr><td><button type="submit" class="btn btn-primary">Добавить</button></td></tr>
+											</fieldset>
+										</form>
+								</tbody>
+							</table>
+							
+							</div>
+							</div>
+							</div>
+{% endblock %}

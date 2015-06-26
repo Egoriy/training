@@ -1,0 +1,127 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+
+	
+		<script type="application/javascript" src="/assets/js/jquery-2.1.4.js"></script>
+		<script type="application/javascript" src="/assets/js/myscripts.js"></script>
+				
+					<div class="tabbable tabs-left" >
+					<p><caption>Клиент: {{client}}</caption></p>
+					<button class="btn btn-default btn-change-program"  data-id="{{id_client}}"  >Программы</button>
+					<button  class="btn btn-default btn-change-antr"  data-id="{{id_client}}" >Замеры</button>
+					<button class="btn btn-default btn-change-nutrition"  data-id="{{id_client}}"  >Питание</button>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+						
+							<table class="table" id="content">
+								<caption>Список всех программ клиента </caption>
+								<thead>
+								<tr>
+									<th>№</th>
+									<th>Наименование</th>
+									<th>Количество дней цикла</th>
+									<th>Заметка</th>
+									<th>Дата назначения</th>
+									
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								{% set i = 1 %}
+								{% for program in programs %}
+								{% if program.Archive_flag == 1 %}
+									<tr>
+										
+										<td>{{i}}</td>
+										{% set i = i + 1 %}
+										<td><a href="/index.php/program/{{ program.id_prog}}">{{ program.NameProgram }}</a></td>
+										<td>{{ program.DayOfTheOneCycle }}</td>
+										<td>{{ program.Comment }}</td>
+										<td>{{ program.DateProgram }}</td>
+										<td></td>
+										<td>
+											<form method="POST" action="/index.php/programs/{{ program.id_prog}}/{{id_client}}">
+												<input type="hidden" name="_method" value="DELETE">
+												<button type="submit" class="btn btn-danger">Удалить</button>
+											</form>
+										</td>
+									</tr>
+									</tbody>
+							</table>
+									{% endif %}
+									{% endfor %}
+									
+									<tr>
+									<div class="accordion" id="accordion2">
+										<div class="accordion-group">
+											<div class="accordion-heading">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" id="head_name_accordion">
+												Старые программы
+												</a>
+											</div>
+											<div id="collapseOne" class="accordion-body collapse">
+												<div class="accordion-inner">
+												<table class="table">
+												<caption id="content_name_accordion">Список старых программ клиента </caption>
+												<thead>
+												<tr id="content_head_table">
+													<th>№</th>
+													<th>Наименование</th>
+													<th>Количество дней цикла</th>
+													<th>Заметка</th>
+													<th>Дата назначения</th>
+													
+													<th></th>
+												</tr>
+												</thead>
+												<tbody id="content_body_table">
+												{% set i = 1 %}
+												{% for program in programs %}
+												{% if program.Archive_flag == 0 %}
+													<tr>
+														<td>{{i}}</td>
+														{% set i = i + 1 %}
+														<td><a href="/index.php/program/{{ program.id_prog}}">{{ program.NameProgram }}</a></td>
+														<td>{{ program.DayOfTheOneCycle }}</td>
+														<td>{{ program.Comment }}d</td>
+														<td>{{ program.DateProgram }}</td>
+														<td>
+															<form method="POST" action="/index.php/programs/{{ program.id_prog}}/{{id_client}}">
+																<input type="hidden" name="_method" value="DELETE">
+																<button type="submit" class="btn btn-danger">Удалить</button>
+															</form>
+														</td>
+													</tr>
+													{% endif %}
+													{% endfor %}
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									</tr>
+								</tbody>
+								</table>
+								</div></div>
+							<div id="Content2">
+							<form method="get" action="/index.php/add_programm/{{id_client}}" class="form-inline">
+								<fieldset>
+								<table>
+								<tbody>
+								<thead>
+									<tr><td><legend>Добавить программу</legend></td></tr>
+									<th>
+									<button type="submit" class="btn btn-primary">Добавить программу</button>
+									</th></tr>
+								</thead>
+								</tbody>
+								</table>
+								</fieldset>
+							</form>
+							</div>
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

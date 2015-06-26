@@ -1,0 +1,64 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	
+				<div class="tabbable tabs-left">
+					<ul class="nav nav-tabs">
+					{% set i = 1 %}
+					{%for day in days %}
+						<button class="btn btn-default btn-change-days"  data-id="{{day.idCurrentDay}}" data-item="{{id_prog}}" >{{day.NameOfDay}} №{{i}}</button>
+						{%set i = i +1%}
+					{% endfor %}
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<caption>Упражнения выбранного дня</caption>
+								<thead>
+								<tr>
+									<th>№</th>
+									<th>Упражнение</th>
+									<th>Подходы</th>
+									<th>Повторения</th>
+									<th>Вес</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody id="content">
+								{% set i = 1 %}
+								{% for exercise in exercises %}
+									<tr>
+										<td>{{ i }}</td>
+										<td><a href="/index.php/Approach/{{exercise.idExercise}}/{{id_prog}}">{{ exercise.NameExercise }}</a></td>
+										<td>{{ exercise.CountApproaches }}</td>
+										<td>{{ exercise.CountRepeat }}</td>
+										<td>{{ exercise.TakenWeight }}</td>
+										{% set i = i + 1 %}
+										<td>
+											<form method="POST" action="/index.php/exercise/{{ exercise.idExercise }}/{{id_prog}}">
+												<input type="hidden" name="_method" value="DELETE">
+												<button type="submit" class="btn btn-danger">Удалить</button>
+											</form>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+							<form method="POST" action="/index.php/add_exercise/{{id_prog}}" class="form-inline">
+								<fieldset>
+								<table>
+								<tbody>
+								<thead>
+									<th>
+									<button type="submit" class="btn btn-primary">Добавить упражнение</button>
+									</th></tr>
+								</thead>
+								</tbody>
+								</table>
+								</fieldset>
+							</form>
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

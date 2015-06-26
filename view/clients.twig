@@ -1,0 +1,51 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	
+				<div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<caption>Список всех клиентов</caption>
+								<thead>
+								<tr>
+									<th>№</th>
+									<th>ФИО</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+								
+								{% for client in clients %}
+									<tr id="content">
+										<td>{{client.Clients_number}}</td>
+										<td><a href="/index.php/client/{{ client.id_client}}">{{ client.FIO }}</a></td>
+										<td>
+											<form method="POST" action="/index.php/clients/{{ client.id_client}}">
+												<input type="hidden" name="_method" value="DELETE">
+												<button type="submit" class="btn btn-danger">Удалить</button>
+											</form>
+										</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+							<form  method="GET" action="index.php/clientAdd/{{id_trainer}}" class="form-inline">
+								<fieldset>
+								<table id="content-2">
+								<tbody>
+								<thead>
+									<tr><td><legend>Добавить Клиента</legend></td></tr>
+									<th>
+									<button  class="btn btn-primary">Добавить клиента</button>
+									</th></tr>
+								</thead>
+								</tbody>
+								</table>
+								</fieldset>
+							</form>
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

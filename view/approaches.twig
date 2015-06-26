@@ -1,0 +1,72 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+	<script type="application/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>
+		<script type="application/javascript" src="/assets/js/myscripts.js"></script>
+	
+				<div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+								{{exerciseName}}
+								{%for day in dates%}
+									{%set j=1%}
+									{%for approach in approaches%}
+										{%if approach.id_calendar == day.id_calendar%}
+											{%set j = 0%}
+										{% endif %}
+									{% endfor %}
+								
+									{%if j==0%}
+									<div class="accordion" id="accordion2">
+										<div class="accordion-group">
+											<div class="accordion-heading">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne{{day.id_calendar}}" id="head_name_accordion">
+													Подоходы для тренировки дата которой - {{day.Date}}
+												</a>
+											</div>
+											<div id="collapseOne{{day.id_calendar}}" class="accordion-body collapse">
+												<div class="accordion-inner">
+													<table class="table">
+													<caption>Подоходы </caption>
+													<thead>
+														<tr>
+															
+															<th>Номер подхода</th>
+															<th>Повторений</th>
+															<th>Взятый вес</th>
+															
+															
+														</tr>
+													</thead>
+													<tbody>
+														<div id="collapseOne" class="accordion-body collapse">
+															<div class="accordion-inner">
+															{%set i=1%}
+															{% for approach in approaches %}
+																{%if (approach.id_calendar==day.id_calendar) %}
+																	<tr id="content">
+																		<td>{{i}}</td>{%set i = i+1%}
+																		<td>{{approach.CountOfRepeat}}</td>
+																		<td>{{approach.TakenWeight}}</td>
+																		
+																	</tr>
+																
+																{% endif %}
+															{% endfor %}
+								
+													</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+											
+									</div>
+									
+									{%endif%}
+								{% endfor %}
+							
+							</div>
+							</div>
+							</div>
+
+{% endblock %}

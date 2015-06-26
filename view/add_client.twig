@@ -1,0 +1,33 @@
+{% extends "BASE.twig" %}
+
+{% block rows %}
+   <div class="tabbable tabs-left">
+					<div class="tab-content">
+						<div class="tab-pane fade in active" >
+							<table class="table">
+								<caption>Добавление клиента тренеру {{trainer}}</caption>
+								<thead>
+								<tr>
+									<th>№</th>
+									<th>ФИО</th>
+								</tr>
+								</thead>
+								<tbody>
+										<form method="POST" action="/index.php/client/{{id}}" class="form-inline">
+											<fieldset>
+												<legend>Новый клиент</legend>
+												<div class="form-group">
+													<tr>
+														<td><input name="number" tabindex="1" type="text" required maxlength="8" minlength="8" placeholder="Номер абонемента" class="form-control"></td>
+														<td><input name="FIO" tabindex="2" required placeholder="ФИО" class="form-control"></a></td>
+													</tr>
+												</div>
+												<tr><td><button type="submit" class="btn btn-primary">Добавить клиента</button></td></tr>
+											</fieldset>
+										</form>
+								</tbody>
+							</table>
+							</div>
+							</div>
+							</div>
+{% endblock %}
